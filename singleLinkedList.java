@@ -6,6 +6,7 @@ public class singleLinkedList<E> {
     private Node<E> head = null;
     private int size = 0;
 
+    //Node inner class
     private static class Node<E> {
         //data fields
         private E data;
@@ -24,6 +25,7 @@ public class singleLinkedList<E> {
 
     //add method in the first
    public void add(E item) {
+       //Create temporary node to hold the add node
         Node<E> temp = new Node<>(item, head);
         head = temp;
         size++;
@@ -31,7 +33,7 @@ public class singleLinkedList<E> {
 
     // add method
     public void add(E item, Node<E> node) {
-        //temporary node to hold the add node
+        //Create temporary node to hold the add node
         Node<E> temp = new Node<>(item, node.next);
         node.next = temp;
         size++;
@@ -41,66 +43,64 @@ public class singleLinkedList<E> {
     public int size() {
         return size;
     }
-    //getting node
-    public Node<E> getNode(E item){
-        Node<E> node = head;
-        for(int i = 0; i < size && node != null; i++){
-            if(item.equals(node.data))
-            node = node.next;
-        }
-        return node;
-    }
 
     //Find method
-    public boolean find(E item) { //FIXME --->
+    public boolean find(E item) {
+        //checking the head
+        if(head == null){
+            return  false;
+        }
+        //Create temporary node to compare with the given item
         Node<E> current = head;
-
-            while (current.next != null) {
-
-                if (item.equals(current.next.data)) {//FIXME --->
-                    // current.data = item;
-                    current = current.next;
-                    System.out.println(current.data);
+            //Traversing through all the node till found match
+            while (current != null) {
+                if (current.data == item) {
                     return true;
                 }
-                break;
+                current = current.next;
             }
 
             return false;
-
-    }//FIXME --->
+    }
 
     //Maximum method
-    public int max(){//FIXME ---->
-
+    public int max(){
+        //creating new node to compare with the given item
         Node<E> current = head;
         int max = 0;
-
-        while(current.next != null){
-
-            if((int)current.data > (int)current.next.data)
-                //max = (int)current.data;
-                current = current.next;
-            break;
+        //Traversing through all the node till found match
+        while(current != null){
+            //if the node.data is max return
+            if((int)current.data > max) {
+                max = (int) current.data;
+            } else {
+                max = max;
+            }
+            //making go to the next node
+            current = current.next;
         }
+        return max;
 
-        //return max;
-        return (int)current.next.data;
-    } ////FIXME ---->
+    }
     //Minimum method
-    public int min(){ //FIXME ---->
-
+    public int min(){
+        //creating new node to compare
         Node<E> current = head;
-        int min = (int)current.data;
-
-        while(current.next != null){
-            while((int)current.data < (int)current.next.data)
-                min = (int)current.data;
-                break;
+        int min = (int)current.next.data;
+        //Traversing through all the node till found match
+        while(current != null){
+            //If the min found return
+            if((int)current.data < min) {
+                min = (int) current.data;
+            } else{
+                min = min;
+            }
+            //Making go to the next node
+           current = current.next;
         }
         return min;
-    } //FIXME ----->
-
+    }
+    //printing all the info
     public  String toString(){
         Node<E> current = head;
         StringBuilder result  = new StringBuilder();

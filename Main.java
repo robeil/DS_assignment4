@@ -17,9 +17,7 @@ public class Main {
         System.out.println(list.find(22));
         System.out.println("Maximum " + list.max());
         System.out.println("Minimum " + list.min());
-        //System.out.println(list.find(22)); //FIXME --->
 
-        System.out.println(list.getNode(22));
 
     }
 }
